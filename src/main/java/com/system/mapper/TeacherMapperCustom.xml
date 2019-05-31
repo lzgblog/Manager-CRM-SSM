@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<!--teacherMapper-->
+
+<mapper namespace="com.system.mapper.TeacherMapperCustom">
+    <select id="findAllTeacherByPaging" parameterType="com.system.po.Page" resultType="TeacherCustom">
+        select teacher.*, college.collegeName
+        from teacher, college
+        WHERE teacher.collegeID = college.collegeID
+        LIMIT #{start},#{rows}
+    </select>
+    <select id="selectTeacherCount" resultType="int">
+    	SELECT COUNT(*) FROM teacher
+    </select>
+    <select id="findTeacherById" parameterType="int" resultType="TeacherCustom">
+    	SELECT teacher.*, college.collegeName
+        FROM teacher, college
+        WHERE teacher.collegeID = college.collegeID
+        AND userID=#{id}
+    </select>
+</mapper>
